@@ -4,22 +4,22 @@ Logo")
 <br><br>
 ## Introduction: Platforms & Super Layers
 
-First of all we need to explain how we have separated each large structure of the framework into two concepts: '_Platforms_' and '_Super Layers_'.
+First of all we need to explain how we have separated each large structure of the framework into two concepts: _'Platforms'_ and _'Super Layers'_.
 <br>
 When it comes to code they are both the same, however the main difference is that the SuperLayers can be consumed by all 
-Platforms (IE.: '_Communication_' or '_Blockchain_' Platform).
+Platforms (IE.: _'Communication'_ or _'Blockchain'_ Platform).
 
 There is also another difference which is that the Platforms can consume each other in an incremental order from 
 left to right, so that each Platform can consume all the previous ones. An example of this can be the following:
-The '_Fermat PIP_' Platform will only be able to consume the '_Fermat COR_' Platform, and the '_Fermat WPD_' Platform 
+The _'Fermat PIP'_ Platform will only be able to consume the _'Fermat COR'_ Platform, and the _'Fermat WPD'_ Platform 
 will be able to consume the two previosuly mentioned Platforms, and so on.
 
 The Super Layers behave in a similar way, in that they can consume each other in a descending order from top to bottom,
 so that each Super Layer is able to consume the previous ones. An example of this case is pretty straigtforward: 
-The '_Fermat BCH_' Super Layer is only able to consume the '_Fermat OSA_' Super Layer, and the '_Fermat P2P_' Super Layer
+The _'Fermat BCH'_ Super Layer is only able to consume the _'Fermat OSA'_ Super Layer, and the _'Fermat P2P'_ Super Layer
 is able to consume the previously mentioned Super Layers.
 
-As a reference, please enter the [fermat web's] (http://fermat.org/) '_Architecture_' segment, in which you will be able to see all the previously mentioned relationships.
+As a reference, please enter the [fermat web's] (http://fermat.org/) _'Architecture'_ segment, in which you will be able to see all the previously mentioned relationships.
 
 Before we move forward with the other topics, we think it will be usefull to point out the **Layout** of the system, in order for you to be able to put alltogether the concepts of this document. This goes as follows:
 
@@ -32,12 +32,9 @@ Now that we have covered the two main aspects of the system's architecture (Plat
 detail about their components.
 
 Within each Platform there are one or more Layers, and one of the main aspects of them is that they have the
-functionality to group up several '_Plugins_' that have the same behavior.
+functionality to group up several _'Plugins'_ that have the same behavior.
 <br>
-There is another aspect related to this, which is that the Layers also act as **Merchants** in the way that given a 
-specific request (IE.: We need to compare the exchange rate of two different coins) they will only consume the required
-Plugins (and only the required functionalities) to fulfill the request. 
-[//]: # (lcommunication example)
+There is another aspect related to this, which is that the Layer, in some cases, also acts as a _'channel'_ or _'selector'_ of the necessary Plugins (and their required functionalities) given a specific request. This is best ilustrated by the following example: The _Communications Layer_ has all the required logic for recieving a request and returning a '_communication channel' prioritizing the best possible type of communication of the devices involved in the request.
 
 -
 ### SubSystem
@@ -55,7 +52,7 @@ This last group is the one that has the logic to deliver the best Version of the
 ---
 ##New Platform Generation
 
-We will now continue to describe the **Platform Directory Distribution** standard for the Platforms on Fermat:
+We will now continue to describe the **Platform Directory Distribution** standard for the Platforms in Fermat:
 
 * PLATFORM_NAME/
 * libraries/
@@ -73,14 +70,14 @@ As this is the standard, depending on the Platform there are many more features 
 
 By default, the structure we follow for the _Platform's Core Classes_ when we either need to register or create all the components is as follows:
 
-* AbstractPlatform
-  * registerLayers
-* AbstractLayer
-  * registerAddons/ register Plugins
-* AbstractAddonSubsystem
-  * registerDevelopers
-* AbstractPluginSubsystem
-  * registerDevelopers
+* Platform component <code>extends AbstractPlatform</code>
+  * Here the class is in charge of registering Layers.
+* Layer component <code>extends AbstractLayer</code>
+  * This Layer component is in charge of the register of Addons and/ or Plugins.
+* AddonSubsystem component <code>extends AbstractAddonSubsystem </code>
+  * The AddonSubsystem is in charge of registering of Developers.
+* PluginSubsystem component <code>extends AbstractPluginSubsystem </code>
+  * This PluginSubsystem component is in charge of registering Developers.
 
 Please keep in mind that in order to obtain a readable code, we create all the components alphabetically.
 
